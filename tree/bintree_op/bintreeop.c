@@ -33,6 +33,18 @@ BinTreeNode* copyBinTreeNode(BinTreeNode* pSourceNode) {
 	}
 }
 
+int equalBinTree(BinTree* pFirst, BinTree *pSecond)
+{
+	int ret = FALSE;
+
+	if (pFirst == NULL && pSecond == NULL) {
+		ret = TRUE;
+	}
+	else if (pFirst != NULL && pSecond != NULL && equalBinTreeNode(pFirst->pRootNode, pSecond->pRootNode) == TRUE) {
+		ret = TRUE;
+	}
+}
+
 int equalBinTree(BinTree* pFirst, BinTree* pSecond)
 {
 	int ret = FALSE;
@@ -47,6 +59,21 @@ int equalBinTree(BinTree* pFirst, BinTree* pSecond)
 	return ret;
 }
 
+int equalBinTreeNode(BinTreeNode* pFirst, BinTreeNode* pSecond) {
+	int ret = FALSE;
+
+	if (pFirst == NULL && pSecond == NULL) {
+		ret = TRUE;
+	}
+	else if (pFirst != NULL
+		&& pSecond != NULL
+		&& equalBinTreeNode(pFirst->pLeftChild, pSecond->pLeftChild) == TRUE
+		&& equalBinTreeNode(pFirst->pRightChild, pSecond->pRightChild) == TRUE) {
+		ret = TRUE;
+	}
+
+	return ret;
+}
 int equalBinTreeNode(BinTreeNode* pFirst, BinTreeNode *pSecond)
 {
 	int ret = FALSE;
@@ -70,6 +97,8 @@ int getNodeCountBT(BinTree* pSource)
 	if (pSource != NULL) {
 		ret = getNodeCountBTNode(pSource->pRootNode);
 	}
+
+	return ret;
 }
 
 int getNodeCountBTNode(BinTreeNode* pSource)
@@ -107,4 +136,62 @@ int getLeafNodeCountBTNode(BinTreeNode* pSource)
 	}
 
 	return ret;
+}
+
+int getHeightBT(BinTree* pSource) {
+	int ret = 0;
+	if (pSource != NULL) {
+		ret = getHeightBTNode(pSource->pRootNode);
+	}
+
+	return ret;
+}
+
+int getHeightBTNode(BinTreeNode* pSource) {
+	int ret = 0;
+	
+	if (pSource == NULL) {
+		ret = 1;
+	}
+	else {
+		int leftChildHeight = getHeightBTNode(pSource->pLeftChild);
+		int rightChildHeight = getHeightBTNode(pSource->pRightChild);
+		
+		if (leftChildHeight >= rightChildHeight) {
+			ret = leftChildHeight + 1;
+		}
+		else {
+			ret = rightChildHeight + 1;
+		}
+	}
+
+	return ret;
+}
+
+void displayBinTree(BinTree* pTree)
+{
+	if (pTree != NULL) {
+		displayBinTreeNode(pTree->pRootNode, 0, 'O');
+	}
+	else {
+		printf("트리가 NULL입니다.\n");
+	}
+}
+
+void displayBinTreeNode(BinTreeNode* pNode, int level, char type)
+{
+	int i = 0;
+	for (i = 0; i < level; i++) {
+		printf("   ");
+	}
+
+	if (pNode != NULL) {
+		printf("-[%i, %c]%c\n", level, type, pNode->data);
+
+		displayBinTreeNode(pNode->pLeftChild, level + 1, 'L');
+		displayBinTreeNode(pNode->pRightChild, level + 1, 'R');
+	}
+	else {
+		printf("NULL\n");
+	}
 }
