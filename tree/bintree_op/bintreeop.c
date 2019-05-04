@@ -20,6 +20,7 @@ BinTree* copyBinTree(BinTree* pSource)
 
 BinTreeNode* copyBinTreeNode(BinTreeNode* pSourceNode) {
 	BinTreeNode* pReturn = NULL;
+
 	if (pSourceNode != NULL) {
 		pReturn = (BinTreeNode *)malloc(sizeof(BinTreeNode));
 		if (pReturn != NULL) {
@@ -31,18 +32,8 @@ BinTreeNode* copyBinTreeNode(BinTreeNode* pSourceNode) {
 			printf("오류, 메모리 할당, copyBinTreeNode()\n");
 		}
 	}
-}
 
-int equalBinTree(BinTree* pFirst, BinTree *pSecond)
-{
-	int ret = FALSE;
-
-	if (pFirst == NULL && pSecond == NULL) {
-		ret = TRUE;
-	}
-	else if (pFirst != NULL && pSecond != NULL && equalBinTreeNode(pFirst->pRootNode, pSecond->pRootNode) == TRUE) {
-		ret = TRUE;
-	}
+	return pReturn;
 }
 
 int equalBinTree(BinTree* pFirst, BinTree* pSecond)
@@ -59,21 +50,6 @@ int equalBinTree(BinTree* pFirst, BinTree* pSecond)
 	return ret;
 }
 
-int equalBinTreeNode(BinTreeNode* pFirst, BinTreeNode* pSecond) {
-	int ret = FALSE;
-
-	if (pFirst == NULL && pSecond == NULL) {
-		ret = TRUE;
-	}
-	else if (pFirst != NULL
-		&& pSecond != NULL
-		&& equalBinTreeNode(pFirst->pLeftChild, pSecond->pLeftChild) == TRUE
-		&& equalBinTreeNode(pFirst->pRightChild, pSecond->pRightChild) == TRUE) {
-		ret = TRUE;
-	}
-
-	return ret;
-}
 int equalBinTreeNode(BinTreeNode* pFirst, BinTreeNode *pSecond)
 {
 	int ret = FALSE;

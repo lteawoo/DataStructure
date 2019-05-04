@@ -21,6 +21,9 @@
     <ClCompile Include="bintreeop.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="example07_04.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bintree.h">

@@ -35,7 +35,7 @@ BinTreeNode* insertLeftChildNodeBT(BinTreeNode* pParentNode, BinTreeNode element
 				*(pParentNode->pLeftChild) = element;
 				pParentNode->pLeftChild->pLeftChild = NULL;
 				pParentNode->pLeftChild->pRightChild = NULL;
-				pReturn = pParentNode->pRightChild;
+				pReturn = pParentNode->pLeftChild;
 			}
 			else {
 				printf("오류, 메모리 할당, insertRightChildNodeBT()\n");
