@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bintree_op", "bintree_op\bi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "arrayheap", "arrayheap\arrayheap.vcxproj", "{0E778009-9DCA-49BC-A97A-C6990E611CB1}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "binsearchtree", "binsearchtree\binsearchtree.vcxproj", "{E0C0A114-B13B-4352-8061-40EBE3E43E78}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -61,6 +63,14 @@ Global
 		{0E778009-9DCA-49BC-A97A-C6990E611CB1}.Release|x64.Build.0 = Release|x64
 		{0E778009-9DCA-49BC-A97A-C6990E611CB1}.Release|x86.ActiveCfg = Release|Win32
 		{0E778009-9DCA-49BC-A97A-C6990E611CB1}.Release|x86.Build.0 = Release|Win32
+		{E0C0A114-B13B-4352-8061-40EBE3E43E78}.Debug|x64.ActiveCfg = Debug|x64
+		{E0C0A114-B13B-4352-8061-40EBE3E43E78}.Debug|x64.Build.0 = Debug|x64
+		{E0C0A114-B13B-4352-8061-40EBE3E43E78}.Debug|x86.ActiveCfg = Debug|Win32
+		{E0C0A114-B13B-4352-8061-40EBE3E43E78}.Debug|x86.Build.0 = Debug|Win32
+		{E0C0A114-B13B-4352-8061-40EBE3E43E78}.Release|x64.ActiveCfg = Release|x64
+		{E0C0A114-B13B-4352-8061-40EBE3E43E78}.Release|x64.Build.0 = Release|x64
+		{E0C0A114-B13B-4352-8061-40EBE3E43E78}.Release|x86.ActiveCfg = Release|Win32
+		{E0C0A114-B13B-4352-8061-40EBE3E43E78}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
