@@ -145,6 +145,9 @@
   <ItemGroup>
     <ClInclude Include="binsearchtree.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="binsearchtree.c" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
