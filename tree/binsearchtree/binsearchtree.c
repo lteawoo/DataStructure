@@ -74,3 +74,48 @@ int insertElementBST(BinSearchTree* pBinSearchTree, BinSearchTreeNode element)
 	}
 	return ret;
 }
+
+int deleteElementBST(BinSearchTree* pBinSearchTree, int key) {
+	int ret = TRUE;
+	BinSearchTreeNode* pDelNode = NULL, * pParentNode = NULL;
+	BinSearchTreeNode* pPredecessor = NULL, * pSuccessor = NULL;
+	BinSearchTreeNode* pChildNode = NULL;
+
+	if (pBinSearchTree == NULL) {
+		ret = FALSE;
+		return ret;
+	}
+	pParentNode = NULL;
+	pDelNode = pBinSearchTree->pRootNode;
+	while (pDelNode != NULL) {
+		if (key == pDelNode->key) {
+			break;
+		}
+		pParentNode = pDelNode;
+		if (key < pDelNode->key) {
+			pDelNode = pDelNode->pLeftChild;
+		}
+		else {
+			pDelNode = pDelNode->pRightChild;
+		}
+	}
+	if (pDelNode == NULL) {
+		printf("오류, 존재하지 않는 키-[%d],deleteElementBST()\n", key);
+		ret = FALSE;
+		return ret;
+	}
+	if (pDelNode->pLeftChild == NULL && pDelNode->pRightChild == NULL) {
+		if (pParentNode != NULL) {
+			if (pParentNode->pLeftChild == pDelNode) {
+				pParentNode->pLeftChild = NULL;
+			}
+			else {
+				pParentNode->pRightChild = NULL;
+			}
+		}
+		else {
+			pBinSearchTree->pRootNode = NULL;
+		}
+	}
+
+}
