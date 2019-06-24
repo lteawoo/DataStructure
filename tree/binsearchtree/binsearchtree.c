@@ -117,5 +117,89 @@ int deleteElementBST(BinSearchTree* pBinSearchTree, int key) {
 			pBinSearchTree->pRootNode = NULL;
 		}
 	}
+	else if (pDelNode->pLeftChild != NULL && pDelNode->pRightChild != NULL) {
+		pPredecessor = pDelNode;
+		pSuccessor = pDelNode->pLeftChild;
+		while (pSuccessor->pRightChild != NULL) {
+			pPredecessor = pSuccessor;
+			pSuccessor = pSuccessor->pRightChild;
+		}
+		pPredecessor->pRightChild = pSuccessor->pLeftChild;
+		pSuccessor->pLeftChild = pDelNode->pLeftChild;
+		pSuccessor->pRightChild = pDelNode->pRightChild;
 
+		if (pParentNode != NULL) {
+			if (pParentNode->pLeftChild == pDelNode) {
+				pParentNode->pLeftChild = pSuccessor;
+			}
+			else {
+				pParentNode->pRightChild = pSuccessor;
+			}
+		}
+		else {
+			pBinSearchTree->pRootNode = pSuccessor;
+		}
+	}
+	else {
+		if (pDelNode->pLeftChild != NULL) {
+			pChildNode = pDelNode->pLeftChild;
+		}
+		else {
+			pChildNode = pDelNode->pRightChild;
+		}
+
+		if (pParentNode != NULL) {
+			if (pParentNode->pLeftChild == pDelNode) {
+				pParentNode->pLeftChild = pChildNode;
+			}
+			else {
+				pParentNode->pRightChild = pChildNode;
+			}
+		}
+		else {
+			pBinSearchTree->pRootNode = pChildNode;
+		}
+	}
+
+	free(pDelNode);
+	return ret;
+}
+
+BinSearchTreeNode* searchBST(BinSearchTree* pBinSearchTree, int key) {
+	BinSearchTreeNode* pReturn = NULL;
+
+	if (pBinSearchTree == NULL) {
+		return NULL;
+	}
+
+	pReturn = pBinSearchTree->pRootNode;
+	while (pReturn != NULL) {
+		if (key == pReturn->key) {
+			break;
+		}
+		else if (key < pReturn->key) {
+			pReturn = pReturn->pLeftChild;
+		}
+		else {
+			pReturn = pReturn->pRightChild;
+		}
+	}
+
+	return pReturn;
+}
+
+void deleteBinSearchTree(BinSearchTree* pBinSearchTree)
+{
+	if (pBinSearchTree != NULL) {
+		deleteBinSearchTreeInternal(pBinSearchTree->pRootNode);
+		free(pBinSearchTree);
+	}
+}
+
+void deleteBinSearchTreeInternal(BinSearchTreeNode* pTreeNode) {
+	if (pTreeNode != NULL) {
+		deleteBinSearchTreeInternal(pTreeNode->pLeftChild);
+		deleteBinSearchTreeInternal(pTreeNode->pRightChild);
+		free(pTreeNode);
+	}
 }
