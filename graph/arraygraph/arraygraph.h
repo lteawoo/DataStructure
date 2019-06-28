@@ -13,6 +13,7 @@ typedef struct ArrayGraphType
 ArrayGraph* createArrayGraph(int maxVertexCount);
 ArrayGraph* createArrayDirectedGraph(int maxVertexCount);
 void deleteArrayGraph(ArrayGraph* pGraph);
+int checkVertexValid(ArrayGraph* pGraph, int vertexID);
 int isEmptyAG(ArrayGraph* pGraph);
 int addVertexAG(ArrayGraph* pGraph, int vertexID);
 int addEdgeAG(ArrayGraph* pGraph, int fromVertexID, int toVertexID);

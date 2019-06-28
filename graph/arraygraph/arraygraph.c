@@ -17,7 +17,7 @@ ArrayGraph* createArrayGraph(int maxVertexCount) {
 		pReturn->maxVertexCount = maxVertexCount;
 	}
 	else {
-		pritnf("오류, 최대 노드 개수는 0보다 커야합니다\n");
+		printf("오류, 최대 노드 개수는 0보다 커야합니다\n");
 		return NULL;
 	}
 	
@@ -51,7 +51,7 @@ ArrayGraph* createArrayGraph(int maxVertexCount) {
 
 	memset(pReturn->pVertex, NOT_USED, sizeof(int) * maxVertexCount);
 	for (i = 0; i < maxVertexCount; i++) {
-		memset(pReturn->ppAdjEdge, 0, sizeof(int) * maxVertexCount);
+		memset(pReturn->ppAdjEdge[i], 0, sizeof(int) * maxVertexCount);
 	}
 
 	return pReturn;
@@ -171,6 +171,45 @@ int removeVertexAG(ArrayGraph* pGraph, int vertexID) {
 		}
 
 		pGraph->pVertex[vertexID] = NOT_USED;
+	}
+
+	return ret;
+}
+
+void displayArrayGraph(ArrayGraph* pGraph) {
+	int i = 0;
+	int j = 0;
+
+	if (pGraph != NULL) {
+		for (i = 0; i < pGraph->maxVertexCount; i++) {
+			for (j = 0; j < pGraph->maxVertexCount; j++) {
+				printf("%d ", pGraph->ppAdjEdge[i][j]);
+			}
+			printf("\n");
+		}
+	}
+}
+
+void deleteArrayGraph(ArrayGraph* pGraph) {
+	int i = 0;
+
+	if (pGraph != NULL) {
+		for (i = 0; i < pGraph->maxVertexCount; i++) {
+			free(pGraph->ppAdjEdge[i]);
+		}
+		free(pGraph->ppAdjEdge);
+		free(pGraph->pVertex);
+		free(pGraph);
+	}
+}
+
+int isEmptyAG(ArrayGraph* pGraph) {
+	int ret = TRUE;
+
+	if (pGraph != NULL) {
+		if (pGraph->currentVertexCount > 0) {
+			ret = FALSE;
+		}
 	}
 
 	return ret;
