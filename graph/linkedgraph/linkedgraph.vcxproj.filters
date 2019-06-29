@@ -18,5 +18,16 @@
     <ClInclude Include="linkedgraph.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="graphlinkedlist.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="graphlinkedlist.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="linkedgraph.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

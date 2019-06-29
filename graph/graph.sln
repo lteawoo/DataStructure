@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29009.5
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.705
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "arraygraph", "arraygraph\arraygraph.vcxproj", "{0CCC5E11-0F34-4867-B870-2AD4E9BC195A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "linkedgraph", "linkedgraph\linkedgraph.vcxproj", "{A97FC027-081C-47A4-8C3E-7A51DCD21C3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,14 @@ Global
 		{0CCC5E11-0F34-4867-B870-2AD4E9BC195A}.Release|x64.Build.0 = Release|x64
 		{0CCC5E11-0F34-4867-B870-2AD4E9BC195A}.Release|x86.ActiveCfg = Release|Win32
 		{0CCC5E11-0F34-4867-B870-2AD4E9BC195A}.Release|x86.Build.0 = Release|Win32
+		{A97FC027-081C-47A4-8C3E-7A51DCD21C3F}.Debug|x64.ActiveCfg = Debug|x64
+		{A97FC027-081C-47A4-8C3E-7A51DCD21C3F}.Debug|x64.Build.0 = Debug|x64
+		{A97FC027-081C-47A4-8C3E-7A51DCD21C3F}.Debug|x86.ActiveCfg = Debug|Win32
+		{A97FC027-081C-47A4-8C3E-7A51DCD21C3F}.Debug|x86.Build.0 = Debug|Win32
+		{A97FC027-081C-47A4-8C3E-7A51DCD21C3F}.Release|x64.ActiveCfg = Release|x64
+		{A97FC027-081C-47A4-8C3E-7A51DCD21C3F}.Release|x64.Build.0 = Release|x64
+		{A97FC027-081C-47A4-8C3E-7A51DCD21C3F}.Release|x86.ActiveCfg = Release|Win32
+		{A97FC027-081C-47A4-8C3E-7A51DCD21C3F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
