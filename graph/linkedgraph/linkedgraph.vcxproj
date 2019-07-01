@@ -127,6 +127,7 @@
     <ClInclude Include="graphlinkedlist.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="example08_02.c" />
     <ClCompile Include="graphlinkedlist.c" />
     <ClCompile Include="linkedgraph.c" />
   </ItemGroup>

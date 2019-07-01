@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "graphlinkedlist.h"
 #include "linkedgraph.h"
 
@@ -86,7 +87,7 @@ int addVertexLG(LinkedGraph* pGraph, int vertexID)
 			}
 		}
 		else {
-			prtinf("오류 노드 ID(2) [%d], in addVertexLG()\n", vertexID, pGraph->maxVertexCount);
+			printf("오류, 노드 ID(2) [%d] maxcount[%d], in addVertexLG()\n", vertexID, pGraph->maxVertexCount);
 			ret = FAIL;
 		}
 	}
@@ -115,7 +116,7 @@ int addEdgewithWeightLG(LinkedGraph* pGraph, int fromVertexID, int toVertexID, i
 
 			return ret;
 		}
-		if (checkVertexVaild(pGraph, toVertexID) != SUCCESS) {
+		if (checkVertexValid(pGraph, toVertexID) != SUCCESS) {
 			ret = FAIL;
 
 			return ret;
@@ -123,7 +124,7 @@ int addEdgewithWeightLG(LinkedGraph* pGraph, int fromVertexID, int toVertexID, i
 
 		toNode.vertexID = toVertexID;
 		toNode.weight = weight;
-		addLLElemenetForVertex(pGraph->ppAdjEdge[fromVertexID], 0, toNode);
+		addLLElementForVertex(pGraph->ppAdjEdge[fromVertexID], 0, toNode);
 		pGraph->currentEdgeCount++;
 
 		// 무방향 그래프의 대칭성(Symmetry) 처리.
@@ -193,4 +194,81 @@ int removeEdgeLG(LinkedGraph* pGraph, int fromVertexID, int toVertexID) {
 	}
 
 	return ret;
+}
+
+void deleteGraphNode(LinkedList* pList, int delVertexID) {
+	int i = 0, position = 0;
+	ListNode* pNode = NULL;
+
+	position = findGraphNodePosition(pList, delVertexID);
+	if (position >= 0) {
+		removeLLElement(pList, position);
+	}
+}
+
+int findGraphNodePosition(LinkedList* pList, int vertexID) {
+	int i = 0, position = 0;
+	ListNode* pNode = NULL;
+
+	if (pList != NULL) {
+		pNode = pList->headerNode.pLink;
+		while (pNode != NULL) {
+			if (pNode->data.vertexID == vertexID) {
+				return position;
+			}
+
+			pNode = pNode->pLink;
+			position++;
+		}
+	}
+
+	return -1;
+}
+
+void displayLinkedGraph(LinkedGraph* pGraph) {
+	int i = 0, j = 0;
+	int position = 0;
+	ListNode* pNode = NULL;
+
+	if (pGraph != NULL) {
+		for (i = 0; i < pGraph->maxVertexCount; i++) {
+			for (j = 0; j < pGraph->maxVertexCount; j++) {
+				position = findGraphNodePosition(pGraph->ppAdjEdge[i], j);
+
+				if (position >= 0) {
+					pNode = getLLElement(pGraph->ppAdjEdge[i], position);
+					printf("%d ", pNode->data.weight);
+				}
+				else {
+					printf("0 ");
+				}
+			}
+
+			printf("\n");
+		}
+	}
+}
+
+void deleteLinkedGraph(LinkedGraph* pGraph) {
+	int i = 0;
+
+	if (pGraph != NULL) {
+		for (i = 0; i < pGraph->maxVertexCount; i++) {
+			deleteLinkedList(pGraph->ppAdjEdge[i]);
+		}
+
+		if (pGraph->ppAdjEdge != NULL) free(pGraph->ppAdjEdge);
+		if (pGraph->pVertex != NULL) free(pGraph->pVertex);
+		free(pGraph);
+	}
+}
+
+int isEmptyLG(LinkedGraph* pGraph) {
+	if (pGraph != NULL) {
+		if (pGraph->currentVertexCount > 0) {
+			return FALSE;
+		}
+	}
+
+	return TRUE;
 }

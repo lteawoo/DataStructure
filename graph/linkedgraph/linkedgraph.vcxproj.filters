@@ -29,5 +29,8 @@
     <ClCompile Include="linkedgraph.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="example08_02.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -88,3 +88,63 @@ int removeLLElement(LinkedList* pList, int position) {
 
 	return ret;
 }
+
+ListNode* getLLElement(LinkedList* pList, int position)
+{
+	ListNode* pReturn = NULL;
+	int i = 0;
+	ListNode* pNode = NULL;
+	if (pList != NULL) {
+		if (position >= 0 && position < pList->currentElementCount) {
+			pNode = &(pList->headerNode);
+			for (i = 0; i <= position; i++) {
+				pNode = pNode->pLink;
+			}
+			pReturn = pNode;
+		}
+	}
+
+	return pReturn;
+}
+
+void deleteLinkedList(LinkedList* pList)
+{
+	int i = 0;
+	if (pList != NULL) {
+		clearLinkedList(pList);
+		free(pList);
+	}
+}
+
+void clearLinkedList(LinkedList* pList)
+{
+	if (pList != NULL) {
+		if (pList->currentElementCount > 0) {
+			removeLLElement(pList, 0);
+		}
+	}
+}
+
+int getLinkedListLength(LinkedList* pList)
+{
+	int ret = 0;
+
+	if (pList != NULL) {
+		ret = pList->currentElementCount;
+	}
+
+	return ret;
+}
+
+int isEmpty(LinkedList* pList)
+{
+	int ret = FALSE;
+
+	if (pList != NULL) {
+		if (pList->currentElementCount == 0) {
+			ret = TRUE;
+		}
+	}
+
+	return ret;
+}

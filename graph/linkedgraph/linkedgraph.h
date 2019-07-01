@@ -27,7 +27,7 @@ int getEdgeCountLG(LinkedGraph* pGraph);
 int getVertexCountLG(LinkedGraph* pGraph);
 int getMaxVertexCountLG(LinkedGraph* pGraph);
 int getGraphTypeLG(LinkedGraph* pGraph);
-void displayLinkedGraph(LinkedGraph pGraph);
+void displayLinkedGraph(LinkedGraph* pGraph);
 #endif
 
 #ifndef _COMMON_GRAPH_DEF_
