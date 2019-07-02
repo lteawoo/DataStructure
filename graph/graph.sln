@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "arraygraph", "arraygraph\ar
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "linkedgraph", "linkedgraph\linkedgraph.vcxproj", "{A97FC027-081C-47A4-8C3E-7A51DCD21C3F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "graphtraversal", "graphtraversal\graphtraversal.vcxproj", "{0BC6E642-30B3-4DB6-9093-4FBB1C639568}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{A97FC027-081C-47A4-8C3E-7A51DCD21C3F}.Release|x64.Build.0 = Release|x64
 		{A97FC027-081C-47A4-8C3E-7A51DCD21C3F}.Release|x86.ActiveCfg = Release|Win32
 		{A97FC027-081C-47A4-8C3E-7A51DCD21C3F}.Release|x86.Build.0 = Release|Win32
+		{0BC6E642-30B3-4DB6-9093-4FBB1C639568}.Debug|x64.ActiveCfg = Debug|x64
+		{0BC6E642-30B3-4DB6-9093-4FBB1C639568}.Debug|x64.Build.0 = Debug|x64
+		{0BC6E642-30B3-4DB6-9093-4FBB1C639568}.Debug|x86.ActiveCfg = Debug|Win32
+		{0BC6E642-30B3-4DB6-9093-4FBB1C639568}.Debug|x86.Build.0 = Debug|Win32
+		{0BC6E642-30B3-4DB6-9093-4FBB1C639568}.Release|x64.ActiveCfg = Release|x64
+		{0BC6E642-30B3-4DB6-9093-4FBB1C639568}.Release|x64.Build.0 = Release|x64
+		{0BC6E642-30B3-4DB6-9093-4FBB1C639568}.Release|x86.ActiveCfg = Release|Win32
+		{0BC6E642-30B3-4DB6-9093-4FBB1C639568}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
