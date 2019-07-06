@@ -21,13 +21,13 @@
     <ClCompile Include="linkedgraph.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="linkedstack.c">
+    <ClCompile Include="linkedqueue.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="graphtraversal.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="example08_03.c">
+    <ClCompile Include="example08_04.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,7 +38,7 @@
     <ClInclude Include="linkedgraph.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="linkedstack.h">
+    <ClInclude Include="linkedqueue.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="graphtraversal.h">

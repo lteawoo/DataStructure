@@ -18,12 +18,25 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="example08_04.c" />
+    <ClCompile Include="graphlinkedlist.c" />
+    <ClCompile Include="graphtraversal.c" />
+    <ClCompile Include="linkedgraph.c" />
+    <ClCompile Include="linkedqueue.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="graphlinkedlist.h" />
+    <ClInclude Include="graphtraversal.h" />
+    <ClInclude Include="linkedgraph.h" />
+    <ClInclude Include="linkedqueue.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{0BC6E642-30B3-4DB6-9093-4FBB1C639568}</ProjectGuid>
+    <ProjectGuid>{A81E4EC3-F3D3-46BF-8325-3943333AE668}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>graphtraversal</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <RootNamespace>graphtraversalbfs</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -142,19 +155,6 @@
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="example08_03.c" />
-    <ClCompile Include="graphlinkedlist.c" />
-    <ClCompile Include="graphtraversal.c" />
-    <ClCompile Include="linkedgraph.c" />
-    <ClCompile Include="linkedstack.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="graphlinkedlist.h" />
-    <ClInclude Include="graphtraversal.h" />
-    <ClInclude Include="linkedgraph.h" />
-    <ClInclude Include="linkedstack.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
