@@ -272,3 +272,23 @@ int isEmptyLG(LinkedGraph* pGraph) {
 
 	return TRUE;
 }
+
+int getVertexCountLG(LinkedGraph* pGraph) {
+	int ret = 0;
+
+	if (pGraph != NULL) {
+		ret = pGraph->currentVertexCount;
+	}
+
+	return ret;
+}
+
+int getMaxVertexCountLG(LinkedGraph* pGraph) {
+	int ret = 0;
+
+	if (pGraph != NULL) {
+		ret = pGraph->maxVertexCount;
+	}
+
+	return ret;
+}

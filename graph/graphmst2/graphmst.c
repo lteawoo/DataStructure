@@ -51,6 +51,13 @@ LinkedGraph* mstPrim(LinkedGraph* pGraph, int startVertexID)
 	return pReturn;
 }
 
+int pushLSForDFS(LinkedStack* pStack, int nodeID)
+{
+	StackNode node = { 0, };
+	node.data = nodeID;
+	return pushLS(pStack, node);
+}
+
 // 정점(fromVertexID)과 부속된 모든 간선들 중, 
 // 가중치가 가장 작으면서 순환을 발생시키지 않는 간선을 선택.
 void getMinWeightEdge(LinkedGraph* pGraph, LinkedGraph* pMST, int fromVertexID, GraphEdge* pMinWeightEdge) {
@@ -153,4 +160,20 @@ int checkCycle(LinkedGraph* pGraph, int fromVertexID, int toVertexID)
 	deleteLinkedStack(pStack);
 
 	return pReturn;
+}
+
+int checkEdge(LinkedGraph* pGraph, int fromVertexID, int toVertexID) {
+	int ret = FALSE;
+	LinkedList* pEdgeList = NULL;
+	int position = 0;
+
+	if (pGraph != NULL) {
+		pEdgeList = pGraph->ppAdjEdge[fromVertexID];
+		position = findGraphNodePosition(pEdgeList, toVertexID);
+		if (position >= 0) {
+			ret = TRUE;
+		}
+	}
+
+	return ret;
 }
