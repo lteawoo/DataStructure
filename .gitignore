@@ -3,7 +3,7 @@
 ################################################################################
 
 /.vs
-/.vs/*
+/.vs/slnx.sqlite
 /graph/arraygraph/Debug
 /graph/.vs/graph/v16
 /graph/linkedgraph/Debug
