@@ -14,7 +14,7 @@ int *shortestPathDijkstra(LinkedGraph* pGraph, int startVertexID) {
 	ListNode *pListNode = NULL;
 	LinkedList *pEdgeList = NULL;
 
-	if (pGraph != NULL) {
+	if (pGraph == NULL) {
 		printf("Graph is NULL\n");
 		return pReturn;
 	}
@@ -70,13 +70,93 @@ int *shortestPathDijkstra(LinkedGraph* pGraph, int startVertexID) {
 		}
 
 		for (j = 0; j < maxNodeCount; j++) {
-			printf("\t(%d, %d)->5d\n", startVertexID, j, pReturn[j]);
+			printf("\t(%d, %d)->%d\n", startVertexID, j, pReturn[j]);
 		}
 	}
 
 	free(pSelected);
 
 	return pReturn;
+}
+
+// Floyd 알고리즘
+int** shortestPathFloyd(LinkedGraph* pGraph) {
+	int **pReturn = NULL;
+	int r = 0, s = 0, v = 0;
+	int weight = 0;
+	int maxNodeCount = 0;
+
+	if (pGraph == NULL) {
+		printf("Graph is NULL\n");
+		return NULL;
+	}
+	maxNodeCount = getMaxVertexCountLG(pGraph);
+	printf("노드 개수: %d\n", maxNodeCount);
+
+	pReturn = (int **)malloc(sizeof(int*) * maxNodeCount);
+	if (pReturn == NULL) {
+		printf("오류 메모리할당(1) in shortestPathFloyd()\n");
+		return NULL;
+	}
+
+	for (r = 0; r < maxNodeCount; r++) {
+		pReturn[r] = (int *)malloc(sizeof(int) * maxNodeCount);
+		if (pReturn[r] == NULL) {
+			for (s = 0; s < r - 1; s++) {
+				if (pReturn[s] != NULL) free(pReturn[s]);
+			}
+			if (pReturn != NULL) free(pReturn);
+			printf("오류, 메모리할당(2) in shortestPathFloyd()\n");
+			return NULL;
+		}
+	}
+
+	//초기화, 배열 pReturn의 초기화
+	for (r = 0; r < maxNodeCount; r++) {
+		for (s = 0; s < maxNodeCount; s++) {
+			if (r == s) {
+				pReturn[r][s] = 0;
+			}
+			else {
+				pReturn[r][s] = getEdgeWeight(pGraph, r, s);
+			}
+		}
+	}
+	printMatrix(pReturn, maxNodeCount);
+
+	//Step 1. 삼중 Loop
+	for (v = 0; v < maxNodeCount; v++) {
+		for (r = 0; r < maxNodeCount; r++) {
+			for (s = 0; s < maxNodeCount; s++) {
+				if (pReturn[r][v] + pReturn[v][s] < pReturn[r][s]) {
+					pReturn[r][s] = pReturn[r][v] + pReturn[v][s];
+				}
+			}
+		}
+
+		printf("[%d]-루프\n", v + 1);
+		printMatrix(pReturn, maxNodeCount);
+	}
+
+	return pReturn;
+}
+
+void printMatrix(int **A, int maxNodeCount) {
+	int r = 0;
+	int s = 0;
+
+	for (s = 0; s < maxNodeCount; s++) {
+		printf("\t%d", s);
+	}
+	printf("\n");
+
+	for (r = 0; r < maxNodeCount; r++) {
+		printf("%d:\t", r);
+		for (s = 0; s < maxNodeCount; s++) {
+			printf("%d\t", A[r][s]);
+		}
+		printf("\n");
+	}
 }
 
 int getMinDistance(int* distance, int *pSelected, int maxNodeCount) {

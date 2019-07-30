@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="example08_07.c" />
     <ClCompile Include="graphlinkedlist.c" />
     <ClCompile Include="graphsp.c" />
     <ClCompile Include="linkedgraph.c" />
