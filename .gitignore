@@ -23,3 +23,8 @@
 /sort/Debug
 /sort/selectionSort/Debug
 /sort/quickSort/Debug
+/sort/insertionSort/x64/Debug
+/sort/selectionSort/x64/Debug
+/sort/x64/Debug
+/sort/shellSort/x64/Debug
+/sort/mergeSort/x64/Debug
