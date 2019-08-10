@@ -2,13 +2,15 @@
 #include <stdlib.h>
 
 int partitionQuickSort(int value[], int start, int end);
+int partitionMedianQuickSort(int value[], int start, int end);
 void printArray(int value[], int count);
 
 void quickSort(int value[], int start, int end)
 {
 	int pivot = 0;
 	if (start < end) {
-		pivot = partitionQuickSort(value, start, end);
+		printf("start-----\n");
+		pivot = partitionMedianQuickSort(value, start, end);
 		quickSort(value, start, pivot - 1);
 		quickSort(value, pivot + 1, end);
 	}
@@ -50,6 +52,38 @@ int partitionQuickSort(int value[], int start, int end)
 	printf("start -[%d]. end-[%d], left-[%d], right-[%d], pivot-[%d],out-loop,", start, end, left, right, value[right]);
 
 	printArray(value, end - start + 1);
+
+	return right;
+}
+
+int partitionMedianQuickSort(int value[], int start, int end)
+{
+	int pivot = 0;
+	int temp = 0, left = 0, right = 0;
+
+	left = start;
+	right = end;
+	pivot = value[(start + end) / 2];
+
+	while (1) {
+		while ((value[left] < pivot) && (left < end)) {
+			left++;
+		}
+
+		while ((value[right] > pivot) && (right > start)) {
+			right--;
+		}
+
+		if (left >= right) break;
+
+		temp = value[right];
+		value[right] = value[left];
+		value[left] = temp;
+
+		printf("start-[%d]. end-[%d], left-[%d], right-[%d], pivot-[%d],in-loop,", start, end, left, right, pivot);
+
+		printArray(value, 8);
+	}
 
 	return right;
 }
