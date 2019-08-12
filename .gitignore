@@ -31,3 +31,6 @@
 /sort/radixSort/x64/Debug
 /sort/heapSort/x64/Debug
 /sort/quickSort/x64/Debug
+/search/.vs/search/v15
+/search/Debug
+/search/seqsearch/Debug
