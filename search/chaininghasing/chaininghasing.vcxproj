@@ -23,7 +23,7 @@
     <ProjectGuid>{66F748D3-5309-4F77-A08A-3DF3DD690B28}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>chaininghasing</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -148,6 +148,7 @@
     <ClInclude Include="statichashing.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="example10_05.c" />
     <ClCompile Include="hashinglinkedlist.c" />
     <ClCompile Include="statichashing.c" />
   </ItemGroup>
