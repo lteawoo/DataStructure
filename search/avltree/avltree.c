@@ -130,3 +130,185 @@ int insertNodeAVL(AVLTree* pAVLTree, AVLTreeNodeData element) {
 
 	return ret;
 }
+
+// 균형 잡기.
+void balanceAVLTree(AVLTree* pAVLTree, LinkedStack* pStack) {
+	AVLTreeNode *pParentNode = NULL;
+	AVLTreeNode *pNode = NULL;
+	AVLTreeNode *pChildNode = NULL;
+	AVLTreeNode *pNewNode = NULL;
+
+	if (pAVLTree == NULL || pStack == NULL) {
+		return;
+	}
+
+	while (isLinkedStackEmpty(pStack) == FALSE) {
+		pNode = popAVLTreeNode(pStack);
+		if (pNode != NULL) {
+			updateHeightAndBalanceAVL(pNode);
+
+			if (pNode->balance = -1 && pNode->balance <= 1) {
+				continue;
+			}
+
+			if (pNode->balance > 1) {
+				pChildNode = pNode->pLeftChild;
+				if (pChildNode->balance > 0) {
+					pNewNode = rotateLLAVLTree(pNode);
+				}
+				else {
+					pNewNode = roatateLRAVLTree(pNode);
+				}
+			}
+			else if (pNode->balance < -1) {
+				pChildNode = pNode->pRightChild;
+				if (pChildNode->balance < 0) {
+					pNewNode = rotateRRAVLTree(pNode);
+				}
+				else {
+					pNewNode = rotateRLAVLTree(pNode);
+				}
+			}
+
+			pParentNode = peekAVLTreeNode(pStack);
+			if (pParentNode != NULL) {
+				if (pParentNode->pLeftChild == pNode) {
+					pParentNode->pLeftChild = pNewNode;
+				}
+				else {
+					pParentNode->pRightChild = pNewNode;
+				}
+			}
+			else {
+				pAVLTree->pRootNode = pNewNode;
+			}
+		}
+	}
+}
+
+int pushAVLTreeNode(LinkedStack* pStack, AVLTreeNode* data)
+{
+	StackNode node = { 0, };
+	node.data = data;
+
+	return pushLS(pStack, node);
+}
+
+AVLTreeNode *popAVLTreeNode(LinkedStack* pStack)
+{
+	AVLTreeNode *pReturn = NULL;
+
+	if (isLinkedStackEmpty(pStack) == FALSE) {
+		StackNode* pNode = popLS(pStack);
+		if (pNode != NULL) {
+			pReturn = pNode->data;
+
+			free(pNode);
+		}
+	}
+
+	return pReturn;
+}
+
+AVLTreeNode *peekAVLTreeNode(LinkedStack* pStack) {
+	AVLTreeNode *pReturn = NULL;
+
+	if (isLinkedStackEmpty(pStack) == FALSE) {
+		StackNode* pNode = peekLS(pStack);
+		if (pNode != NULL) {
+			pReturn = pNode->data;
+		}
+	}
+
+	return pReturn;
+}
+
+// 균형 잡기: LL 회전
+AVLTreeNode* rotateLLAVLTree(AVLTreeNode *pParentNode)
+{
+	AVLTreeNode *pLeftNode = NULL;
+
+	if (pParentNode != NULL) {
+		pLeftNode = pParentNode->pLeftChild;
+		pParentNode->pLeftChild = pLeftNode->pRightChild;
+		pLeftNode->pRightChild = pParentNode;
+
+		updateHeightAndBalanceAVL(pParentNode);
+		updateHeightAndBalanceAVL(pLeftNode);
+	}
+
+	return pLeftNode;
+}
+
+// 균형 잡기: RR 회전
+AVLTreeNode* rotateRRAVLTree(AVLTreeNode *pParentNode)
+{
+	AVLTreeNode *pRightNode = NULL;
+
+	if (pParentNode != NULL) {
+		pRightNode = pParentNode->pRightChild;
+		pParentNode->pRightChild = pRightNode->pLeftChild;
+		pRightNode->pLeftChild = pParentNode;
+
+		updateHeightAndBalanceAVL(pParentNode);
+		updateHeightAndBalanceAVL(pRightNode);
+	}
+
+	return pRightNode;
+}
+
+// 균형 잡기: LR 회전
+AVLTreeNode* rotateLRAVLTree(AVLTreeNode *pParentNode)
+{
+	AVLTreeNode *pReturn = NULL;
+	AVLTreeNode *pLeftNode = NULL;
+
+	if (pParentNode != NULL) {
+		pLeftNode = pParentNode->pLeftChild;
+		pParentNode->pLeftChild = rotateRRAVLTree(pLeftNode);
+
+		pReturn = rotateLLAVLTree(pParentNode);
+	}
+
+	return pReturn;
+}
+
+// 균형 잡기: RL 회전
+AVLTreeNode* rotateRLAVLTree(AVLTreeNode *pParentNode)
+{
+	AVLTreeNode *pReturn = NULL;
+	AVLTreeNode *pRightNode = NULL;
+
+	if (pParentNode != NULL) {
+		pRightNode = pParentNode->pRightChild;
+		pParentNode->pRightChild = rotateLLAVLTree(pRightNode);
+		pReturn = rotateRRAVLTree(pParentNode);
+	}
+
+	return pReturn;
+}
+
+// 높이 및 균형 인수 정보 변경.
+void updateHeightAndBalanceAVL(AVLTreeNode* pNode) {
+	int leftHeight = 0;
+	int rightHeight = 0;
+	if (pNode != NULL) {
+		if (pNode->pLeftChild != NULL) {
+			leftHeight = pNode->pLeftChild->height;
+		}
+
+		if (pNode->pRightChild != NULL) {
+			rightHeight = pNode->pRightChild->height;
+		}
+
+		if (leftHeight > rightHeight) {
+			pNode->height = leftHeight + 1;
+		}
+		else {
+			pNode->height = rightHeight + 1;
+		}
+
+		pNode->balance = leftHeight - rightHeight;
+	}
+}
+
