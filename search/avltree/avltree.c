@@ -157,7 +157,7 @@ void balanceAVLTree(AVLTree* pAVLTree, LinkedStack* pStack) {
 					pNewNode = rotateLLAVLTree(pNode);
 				}
 				else {
-					pNewNode = roatateLRAVLTree(pNode);
+					pNewNode = rotateLRAVLTree(pNode);
 				}
 			}
 			else if (pNode->balance < -1) {
@@ -312,3 +312,166 @@ void updateHeightAndBalanceAVL(AVLTreeNode* pNode) {
 	}
 }
 
+int deleteNodeAVL(AVLTree* pAVLTree, int key)
+{
+	int ret = TRUE;
+	AVLTreeNode* pDelNode = NULL;
+	AVLTreeNode* pParentNode = NULL;
+
+	AVLTreeNode* pPredecessor = NULL;
+	AVLTreeNode* pSuccessor = NULL;
+
+	AVLTreeNode* pChild = NULL;
+	LinkedStack* pStackMain = NULL;
+	LinkedStack* pStackSub = NULL;
+
+	if (pAVLTree == NULL) {
+		ret = FALSE;
+		return ret;
+	}
+
+	pStackMain = createLinkedStack();
+	pStackSub = createLinkedStack();
+	if (pStackMain == NULL || pStackSub == NULL) {
+		ret = FALSE;
+		return ret;
+	}
+
+	pParentNode = NULL;
+	pDelNode = pAVLTree->pRootNode;
+	while (pDelNode != NULL) {
+		if (key == pDelNode->data.key) {
+			break;
+		}
+		pParentNode = pDelNode;
+		pushAVLTreeNode(pStackMain, pParentNode);
+
+		if (key < pDelNode->data.key) {
+			pDelNode = pDelNode->pLeftChild;
+		}
+		else {
+			pDelNode = pDelNode->pRightChild;
+		}
+	}
+	if (pDelNode == NULL) {
+		printf("오류, 검색 키[%d]인 자료가 없습니다.deleteNodeAVL()\n", key);
+		ret = FALSE;
+		return ret;
+	}
+
+	if (pDelNode->pLeftChild == NULL && pDelNode->pRightChild == NULL) {
+		if (pParentNode != NULL) {
+			if (pParentNode->pLeftChild == pDelNode) {
+				pParentNode->pLeftChild = NULL;
+			}
+			else {
+				pParentNode->pRightChild = NULL;
+			}
+		}
+		else {
+			pAVLTree->pRootNode = NULL;
+		}
+	}
+	else if (pDelNode->pLeftChild != NULL && pDelNode->pRightChild != NULL) {
+		pPredecessor = NULL;
+		pSuccessor = pDelNode->pLeftChild;
+		pushAVLTreeNode(pStackSub, pSuccessor);
+
+		while (pSuccessor->pRightChild != NULL) {
+			pPredecessor = pSuccessor;
+
+			pSuccessor = pSuccessor->pRightChild;
+			pushAVLTreeNode(pStackSub, pSuccessor);
+		}
+		pushAVLTreeNode(pStackMain, popAVLTreeNode(pStackSub));
+
+		if (pPredecessor != NULL) {
+			pPredecessor->pRightChild = pSuccessor->pLeftChild;
+			pSuccessor->pLeftChild = pDelNode->pLeftChild;
+
+			pushAVLTreeNode(pStackSub, pPredecessor->pRightChild);
+		}
+		pSuccessor->pRightChild = pDelNode->pRightChild;
+
+		if (pParentNode != NULL) {
+			if (pParentNode->pLeftChild == pDelNode) {
+				pParentNode->pLeftChild = pSuccessor;
+			}
+			else {
+				pParentNode->pRightChild = pSuccessor;
+			}
+		}
+	}
+	else {
+		if (pDelNode->pLeftChild != NULL) {
+			pChild = pDelNode->pLeftChild;
+		}
+		else {
+			pChild = pDelNode->pRightChild;
+		}
+
+		if (pParentNode != NULL) {
+			if (pParentNode->pLeftChild == pDelNode) {
+				pParentNode->pLeftChild = pChild;
+			}
+			else {
+				pParentNode->pRightChild = pChild;
+			}
+		}
+		else {
+			pAVLTree->pRootNode = pChild;
+		}
+	}
+	free(pDelNode);
+
+	balanceAVLTree(pAVLTree, pStackSub);
+	balanceAVLTree(pAVLTree, pStackMain);
+
+	deleteLinkedStack(pStackMain);
+	deleteLinkedStack(pStackSub);
+
+	return ret;
+}
+
+// 트리의 삭제
+void deleteAVLTree(AVLTree* pAVLTree)
+{
+	if (pAVLTree != NULL) {
+		deleteAVLTreeNode(pAVLTree->pRootNode);
+		free(pAVLTree);
+	}
+}
+
+// 트리 노드의 삭제(재귀적)
+void deleteAVLTreeNode(AVLTreeNode* pAVLTreeNode)
+{
+	if (pAVLTreeNode != NULL) {
+		deleteAVLTreeNode(pAVLTreeNode->pLeftChild);
+		deleteAVLTreeNode(pAVLTreeNode->pRightChild);
+		free(pAVLTreeNode);
+	}
+}
+
+void displayAVLTree(AVLTree *pTree)
+{
+	displayAVLTreeInternal(pTree->pRootNode, 0, ' ');
+}
+
+void displayAVLTreeInternal(AVLTreeNode *pTreeNode, int level, char type)
+{
+	int i = 0;
+	for (i = 0; i < level; i++) {
+		printf("    ");
+	}
+
+	if (pTreeNode != NULL) {
+		printf("-[%i,%i,%c],%i-%s\n", pTreeNode->height, pTreeNode->balance, type,
+			pTreeNode->data.key, pTreeNode->data.value);
+
+		displayAVLTreeInternal(pTreeNode->pLeftChild, level + 1, 'L');
+		displayAVLTreeInternal(pTreeNode->pRightChild, level + 1, 'R');
+	}
+	else {
+		printf("NULL\n");
+	}
+}

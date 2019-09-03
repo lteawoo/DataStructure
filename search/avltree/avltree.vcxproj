@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClCompile Include="avllinkedstack.c" />
     <ClCompile Include="avltree.c" />
+    <ClCompile Include="example10_06.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="avldef.h" />
