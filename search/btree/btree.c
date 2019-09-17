@@ -47,3 +47,62 @@ BTreeNodeData* searchBT(BTree* pBTree, int key) {
 
 	return pReturn;
 }
+
+int pushBTreeNode(LinkedStack* pStack, BTreeNode* data)
+{
+	StackNode node = { 0, };
+	node.data = data;
+
+	return pushLS(pStack, node);
+}
+
+int insertNodeBT(BTree* pBTree, BTreeNodeData element) {
+	int ret = TRUE;
+	int i = 0;
+
+	BTreeNode *pParentNode = NULL, *pCurrentNode = NULL, *pNewNode = NULL;
+	LinkedStack* pStack = NULL;
+
+	if (pBTree == NULL) {
+		ret = FALSE;
+		return ret;
+	}
+	pStack = createLinkedStack();
+	if (pStack == NULL) {
+		ret = FALSE;
+		return ret;
+	}
+
+	// INSERT할 leaf node 찾기.
+	pCurrentNode = pBTree->pRootNode;
+	while (pCurrentNode != NULL) {
+		pParentNode = pCurrentNode;
+		pushBTreeNode(pStack, pParentNode);
+
+		for (i = 0; i < pCurrentNode->elementcount; i++) {
+			int parentKey = pCurrentNode->element[i].key;
+			if (element.key == parentKey) {
+				printf("오류,중복된 키-[%d],insertNodeBT()\n", element.key);
+				ret = FALSE;
+				deleteLinkedStack(pStack);
+				return ret;
+			}
+			else if (element.key < parentKey) {
+				break;
+			}
+		}
+		pCurrentNode = pCurrentNode->pChildren[i];
+	}
+	if (pParentNode == NULL) { // ROOT 노드가 아직 없는 경우.
+		pBTree->pRootNode = createBTreeNode(element);
+	}
+	else {
+		insertNodeElementBT(pParentNode, element, NULL);
+
+		splitNodeBT(pBTree, pStack);
+	}
+	ret = TRUE;
+	deleteLinkedStack(pStack);
+
+	return ret;
+}
