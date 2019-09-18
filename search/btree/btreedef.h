@@ -11,7 +11,7 @@ typedef struct BTreeNodeDataType
 
 typedef struct BTreeNodeType
 {
-	int elementcount;
+	int elementCount;
 	BTreeNodeData element[BTREE_ORDER];
 	struct BTreeNodeType* pChildren[BTREE_ORDER + 1];
 } BTreeNode;
